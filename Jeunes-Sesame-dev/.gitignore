@@ -1,0 +1,15 @@
+node_modules/
+.cache/
+dist/
+.env
+.DS_Store
+coverage/
+.vscode/
+build/
+yarn-error.log
+yarn.lock
+
+# ================
+/**/data
+uploads/
+*.env

@@ -1,0 +1,27 @@
+name: Deploy on Production
+
+on:
+  push:
+    branches: [ "main", "dev" ]
+
+jobs:
+  CD:
+  
+    name: 🎉 Deploy
+    runs-on: ubuntu-latest
+    steps:
+    - name: 🚚 Get latest code
+      uses: actions/checkout@v3
+
+    - name: SSH and deploy docker
+      uses: appleboy/ssh-action@v1.0.3
+      with:
+        host: 161.97.79.59
+        username: ${{ secrets.SSH_USERNAME }}
+        password: ${{ secrets.SSH_PASSWORD }}
+        port: 22
+        script: |
+          cd ~/Jeunes-Sesame/local
+          git pull
+          docker compose down
+          docker compose  --env-file docker-compose.env up -d --build

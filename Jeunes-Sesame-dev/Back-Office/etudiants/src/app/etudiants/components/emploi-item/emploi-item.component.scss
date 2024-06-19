@@ -1,0 +1,30 @@
+
+.card {
+    cursor: pointer;
+    
+    &:hover {
+        transform: scale(1);
+    }
+
+    .signature_carte {
+        display: flex;
+        flex-direction: column;
+        font-size: .5rem;
+        color: currentColor;
+        opacity: .7;
+        position: absolute;
+        bottom: .3rem;
+        left: .7rem;
+    }
+}
+
+.current::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: .5rem;
+    height: .5rem;
+    border-radius: 0 0 100% 0;
+    background-color: #f80707de;
+}

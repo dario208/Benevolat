@@ -1,0 +1,245 @@
+<div class="container-fluid" id="distinctions">
+    <div class="row justify-content-center align-items-center py-3">
+        <div class="col-md-5 col-12 
+            d-flex justify-content-center justify-content-md-end align-items-center">
+            <span class="fw-bold fs-1 me-3">Distinctions</span>
+        </div>
+        <div class="col-md-7 col-12 text-center titre_image_section">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+                <path d="M9.669.864 8 0 6.331.864l-1.858.282-.842 1.68-1.337 1.32L2.6 6l-.306 1.854 1.337 1.32.842 1.68 1.858.282L8 12l1.669-.864 1.858-.282.842-1.68 1.337-1.32L13.4 6l.306-1.854-1.337-1.32-.842-1.68L9.669.864zm1.196 1.193.684 1.365 1.086 1.072L12.387 6l.248 1.506-1.086 1.072-.684 1.365-1.51.229L8 10.874l-1.355-.702-1.51-.229-.684-1.365-1.086-1.072L3.614 6l-.25-1.506 1.087-1.072.684-1.365 1.51-.229L8 1.126l1.356.702 1.509.229z"/>
+                <path d="M4 11.794V16l4-1 4 1v-4.206l-2.018.306L8 13.126 6.018 12.1 4 11.794z"/>
+            </svg>
+        </div>
+    </div>
+    <div class="row mb-2">
+        <div class="col-12">
+            <div class="loader" *ngIf="loading$ | async"></div>
+            <div class="overflow-scroll d-flex scroll_card card_group">
+                <ng-container *ngIf="distinctions$ | async as distinctions">
+                    <app-distinction-item *ngFor="let data of distinctions" [distinction]="data"
+                        (statusUpdateModal)="listenStatusUpdateModal($event)"
+                        (statusDeleteModal)="listenStatusDeleteModal($event)"
+                        class="col-md-3 col-9 m-2 mx-md-3"></app-distinction-item>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="p-1" id="add_button" (click)="listenStatusCreateModal()">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
+        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+    </svg>
+</div>
+
+<!-- ============================== MODAL AJOUTER DISTINCTION ========================= -->
+<div class="modal fade" id="modalCreateDistinction" data-bs-backdrop="static" 
+    tabindex="-1" aria-labelledby="modalCreateDistinctionLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <form class="modal-content" [formGroup]="createForm" (ngSubmit)="onSubmitCreate()">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5 fw-bold" id="modalCreateDistinctionLabel">Ajouter une distinction</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" 
+                    (click)="onCloseCreate()"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row my-3 mx-1 px-1 py-3">
+                    <!-- =============== NOM =============== -->
+                    <div class="col-12">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control ps-4" id="nom_create_distinction" 
+                                placeholder="Nom ***" formControlName="nom_distinction">
+                            <label for="nom_create_distinction" class="ps-4 d-flex align-items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="currentColor" viewBox="0 0 16 16">
+                                    <path d="M8.211 2.047a.5.5 0 0 0-.422 0l-7.5 3.5a.5.5 0 0 0 .025.917l7.5 3a.5.5 0 0 0 .372 0L14 7.14V13a1 1 0 0 0-1 1v2h3v-2a1 1 0 0 0-1-1V6.739l.686-.275a.5.5 0 0 0 .025-.917l-7.5-3.5ZM8 8.46 1.758 5.965 8 3.052l6.242 2.913L8 8.46Z" />
+                                    <path d="M4.176 9.032a.5.5 0 0 0-.656.327l-.5 1.7a.5.5 0 0 0 .294.605l4.5 1.8a.5.5 0 0 0 .372 0l4.5-1.8a.5.5 0 0 0 .294-.605l-.5-1.7a.5.5 0 0 0-.656-.327L8 10.466 4.176 9.032Zm-.068 1.873.22-.748 3.496 1.311a.5.5 0 0 0 .352 0l3.496-1.311.22.748L8 12.46l-3.892-1.556Z"/>
+                                </svg>
+                                <span class="mx-2">Nom de la distinction:</span>
+                            </label>
+                        </div>
+                    </div>
+                    <!-- =============== ORGANISATEUR =============== -->
+                    <div class="col-12">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control ps-4" id="organisateur_create_distinction" 
+                                placeholder="Organisateur ***" formControlName="organisateur">
+                            <label for="organisateur_create_distinction" class="ps-4 d-flex align-items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="currentColor" viewBox="0 0 16 16">
+                                    <path d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1h8Zm-7.978-1A.261.261 0 0 1 7 12.996c.001-.264.167-1.03.76-1.72C8.312 10.629 9.282 10 11 10c1.717 0 2.687.63 3.24 1.276.593.69.758 1.457.76 1.72l-.008.002a.274.274 0 0 1-.014.002H7.022ZM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0ZM6.936 9.28a5.88 5.88 0 0 0-1.23-.247A7.35 7.35 0 0 0 5 9c-4 0-5 3-5 4 0 .667.333 1 1 1h4.216A2.238 2.238 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816ZM4.92 10A5.493 5.493 0 0 0 4 13H1c0-.26.164-1.03.76-1.724.545-.636 1.492-1.256 3.16-1.275ZM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0Zm3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4Z"/>
+                                </svg>
+                                <span class="mx-2">Organisateur:</span>
+                            </label>
+                        </div>
+                    </div>
+                    <!-- ================= LIEU ================== -->
+                    <div class="col-12">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control ps-4" id="lieu_create_distinction" 
+                                placeholder="Lieu ***" formControlName="lieu">
+                            <label for="lieu_create_distinction" class="ps-4 d-flex align-items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="currentColor" viewBox="0 0 16 16">
+                                    <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z"/>
+                                    <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                                </svg>
+                                <span class="mx-2">Lieu:</span>
+                            </label>
+                        </div>
+                    </div>
+                    <!-- ================= ANNÉE ================ -->
+                    <div class="col-12">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control ps-4" id="annee_create_distinction" 
+                                placeholder="Année ***" formControlName="annee">
+                            <label for="annee_create_distinction" class="ps-4 d-flex align-items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="currentColor" viewBox="0 0 16 16">
+                                    <path d="M10.854 7.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708 0z"/>
+                                    <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
+                                </svg>
+                                <span class="mx-2">Année:</span>
+                            </label>
+                        </div>
+                    </div>
+                    <!-- ================= DESCRIPTION ================ -->
+                    <div class="col-12">
+                        <div class="form-floating">
+                            <textarea class="form-control ps-4" id="description_create_distinction" 
+                                placeholder="Description ***" formControlName="description"></textarea>
+                            <label for="description_create_distinction" class="ps-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="currentColor" viewBox="0 0 16 16">
+                                    <path d="M2.5 3a.5.5 0 0 0 0 1h11a.5.5 0 0 0 0-1h-11zm0 3a.5.5 0 0 0 0 1h6a.5.5 0 0 0 0-1h-6zm0 3a.5.5 0 0 0 0 1h6a.5.5 0 0 0 0-1h-6zm0 3a.5.5 0 0 0 0 1h11a.5.5 0 0 0 0-1h-11zm10.113-5.373a6.59 6.59 0 0 0-.445-.275l.21-.352c.122.074.272.17.452.287.18.117.35.26.51.428.156.164.289.351.398.562.11.207.164.438.164.692 0 .36-.072.65-.216.873-.145.219-.385.328-.721.328-.215 0-.383-.07-.504-.211a.697.697 0 0 1-.188-.463c0-.23.07-.404.211-.521.137-.121.326-.182.569-.182h.281a1.686 1.686 0 0 0-.123-.498 1.379 1.379 0 0 0-.252-.37 1.94 1.94 0 0 0-.346-.298zm-2.168 0A6.59 6.59 0 0 0 10 6.352L10.21 6c.122.074.272.17.452.287.18.117.35.26.51.428.156.164.289.351.398.562.11.207.164.438.164.692 0 .36-.072.65-.216.873-.145.219-.385.328-.721.328-.215 0-.383-.07-.504-.211a.697.697 0 0 1-.188-.463c0-.23.07-.404.211-.521.137-.121.327-.182.569-.182h.281a1.749 1.749 0 0 0-.117-.492 1.402 1.402 0 0 0-.258-.375 1.94 1.94 0 0 0-.346-.3z"/>
+                                </svg>
+                                <span class="mx-2">Description:</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary close" 
+                    data-bs-dismiss="modal" (click)="onCloseCreate()">Annuler</button>
+                <button type="submit" class="btn rounded-pill valider fw-bold" 
+                    [disabled]="createForm.invalid">Enregistrer</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- ============================== MODAL MODIFIER DISTINCTION ========================= -->
+<div class="modal fade" id="modalModifierDistinction" data-bs-backdrop="static" 
+    tabindex="-1" aria-labelledby="modalModifierDistinctionLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <form class="modal-content" [formGroup]="updateForm" (ngSubmit)="onSubmitUpdate()">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5 fw-bold" id="modalModifierDistinctionLabel">Modifier une distinction</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" 
+                    (click)="onCloseUpdate()"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row my-3 mx-1 px-1 py-3">
+                    <!-- =============== NOM =============== -->
+                    <div class="col-12">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control ps-4" id="nom_update_distinction" 
+                                placeholder="Nom ***" formControlName="nom_distinction">
+                            <label for="nom_update_distinction" class="ps-4 d-flex align-items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="currentColor" viewBox="0 0 16 16">
+                                    <path d="M8.211 2.047a.5.5 0 0 0-.422 0l-7.5 3.5a.5.5 0 0 0 .025.917l7.5 3a.5.5 0 0 0 .372 0L14 7.14V13a1 1 0 0 0-1 1v2h3v-2a1 1 0 0 0-1-1V6.739l.686-.275a.5.5 0 0 0 .025-.917l-7.5-3.5ZM8 8.46 1.758 5.965 8 3.052l6.242 2.913L8 8.46Z" />
+                                    <path d="M4.176 9.032a.5.5 0 0 0-.656.327l-.5 1.7a.5.5 0 0 0 .294.605l4.5 1.8a.5.5 0 0 0 .372 0l4.5-1.8a.5.5 0 0 0 .294-.605l-.5-1.7a.5.5 0 0 0-.656-.327L8 10.466 4.176 9.032Zm-.068 1.873.22-.748 3.496 1.311a.5.5 0 0 0 .352 0l3.496-1.311.22.748L8 12.46l-3.892-1.556Z"/>
+                                </svg>
+                                <span class="mx-2">Nom de la distinction:</span>
+                            </label>
+                        </div>
+                    </div>
+                     <!-- =============== ORGANISATEUR =============== -->
+                    <div class="col-12">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control ps-4" id="organisateur_update_distinction" 
+                                placeholder="Organisateur ***" formControlName="organisateur">
+                            <label for="organisateur_update_distinction" class="ps-4 d-flex align-items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="currentColor" viewBox="0 0 16 16">
+                                    <path d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1h8Zm-7.978-1A.261.261 0 0 1 7 12.996c.001-.264.167-1.03.76-1.72C8.312 10.629 9.282 10 11 10c1.717 0 2.687.63 3.24 1.276.593.69.758 1.457.76 1.72l-.008.002a.274.274 0 0 1-.014.002H7.022ZM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0ZM6.936 9.28a5.88 5.88 0 0 0-1.23-.247A7.35 7.35 0 0 0 5 9c-4 0-5 3-5 4 0 .667.333 1 1 1h4.216A2.238 2.238 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816ZM4.92 10A5.493 5.493 0 0 0 4 13H1c0-.26.164-1.03.76-1.724.545-.636 1.492-1.256 3.16-1.275ZM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0Zm3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4Z"/>
+                                </svg>
+                                <span class="mx-2">Organisateur:</span>
+                            </label>
+                        </div>
+                    </div>
+                    <!-- ================= LIEU ================== -->
+                    <div class="col-12">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control ps-4" id="lieu_update_distinction" 
+                                placeholder="Lieu ***" formControlName="lieu">
+                            <label for="lieu_update_distinction" class="ps-4 d-flex align-items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="currentColor" viewBox="0 0 16 16">
+                                    <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z"/>
+                                    <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                                </svg>
+                                <span class="mx-2">Lieu:</span>
+                            </label>
+                        </div>
+                    </div>
+                    <!-- ================= ANNÉE ================ -->
+                    <div class="col-12">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control ps-4" id="annee_update_distinction" 
+                                placeholder="Année ***" formControlName="annee">
+                            <label for="annee_update_distinction" class="ps-4 d-flex align-items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="currentColor" viewBox="0 0 16 16">
+                                    <path d="M10.854 7.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708 0z"/>
+                                    <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
+                                </svg>
+                                <span class="mx-2">Année:</span>
+                            </label>
+                        </div>
+                    </div>
+                    <!-- ================= DESCRIPTION ================ -->
+                    <div class="col-12">
+                        <div class="form-floating">
+                            <textarea class="form-control ps-4" id="description_update_distinction" 
+                                placeholder="Description ***" formControlName="description"></textarea>
+                            <label for="description_update_distinction" class="ps-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="currentColor" viewBox="0 0 16 16">
+                                    <path d="M2.5 3a.5.5 0 0 0 0 1h11a.5.5 0 0 0 0-1h-11zm0 3a.5.5 0 0 0 0 1h6a.5.5 0 0 0 0-1h-6zm0 3a.5.5 0 0 0 0 1h6a.5.5 0 0 0 0-1h-6zm0 3a.5.5 0 0 0 0 1h11a.5.5 0 0 0 0-1h-11zm10.113-5.373a6.59 6.59 0 0 0-.445-.275l.21-.352c.122.074.272.17.452.287.18.117.35.26.51.428.156.164.289.351.398.562.11.207.164.438.164.692 0 .36-.072.65-.216.873-.145.219-.385.328-.721.328-.215 0-.383-.07-.504-.211a.697.697 0 0 1-.188-.463c0-.23.07-.404.211-.521.137-.121.326-.182.569-.182h.281a1.686 1.686 0 0 0-.123-.498 1.379 1.379 0 0 0-.252-.37 1.94 1.94 0 0 0-.346-.298zm-2.168 0A6.59 6.59 0 0 0 10 6.352L10.21 6c.122.074.272.17.452.287.18.117.35.26.51.428.156.164.289.351.398.562.11.207.164.438.164.692 0 .36-.072.65-.216.873-.145.219-.385.328-.721.328-.215 0-.383-.07-.504-.211a.697.697 0 0 1-.188-.463c0-.23.07-.404.211-.521.137-.121.327-.182.569-.182h.281a1.749 1.749 0 0 0-.117-.492 1.402 1.402 0 0 0-.258-.375 1.94 1.94 0 0 0-.346-.3z"/>
+                                </svg>
+                                <span class="mx-2">Description:</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary close" 
+                    data-bs-dismiss="modal" (click)="onCloseUpdate()">Annuler</button>
+                <button type="submit" class="btn rounded-pill valider fw-bold" [disabled]="updateForm.invalid">Valider</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- ============================== MODAL SUPPRIMER DISTINCTION ========================= -->
+<div class="modal fade" id="modalSupprimerDistinction" data-bs-backdrop="static" 
+    tabindex="-1" aria-labelledby="modalSupprimerDistinctionLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-sm">
+        <form class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-6 fw-bold" id="modalSupprimerDistinctionLabel">Suppression</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" 
+                    (click)="onCloseDelete()"></button>
+            </div>
+            <div class="modal-body d-flex align-items-center justify-content-center text-danger">
+                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                    <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                </svg>
+                <div class="ms-2">
+                    Voulez-vous supprimer <span class="fw-bold">{{currentDistinction?.nom}} ?</span>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn text-muted close" 
+                    data-bs-dismiss="modal" (click)="onCloseDelete()">Non</button>
+                <button type="button" class="btn text-danger valider fw-bold" 
+                    (click)="onConfirmDelete()">Oui</button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,217 @@
+<div class="container-fluid" id="projets">
+    <div class="row justify-content-center align-items-center py-3">
+        <div class="col-md-5 col-12 
+            d-flex justify-content-center justify-content-md-end align-items-center">
+            <span class="fw-bold fs-1 me-3">Projets</span>
+        </div>
+        <div class="col-md-7 col-12 text-center titre_image_section">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+                <path d="M9.972 2.508a.5.5 0 0 0-.16-.556l-.178-.129a5.009 5.009 0 0 0-2.076-.783C6.215.862 4.504 1.229 2.84 3.133H1.786a.5.5 0 0 0-.354.147L.146 4.567a.5.5 0 0 0 0 .706l2.571 2.579a.5.5 0 0 0 .708 0l1.286-1.29a.5.5 0 0 0 .146-.353V5.57l8.387 8.873A.5.5 0 0 0 14 14.5l1.5-1.5a.5.5 0 0 0 .017-.689l-9.129-8.63c.747-.456 1.772-.839 3.112-.839a.5.5 0 0 0 .472-.334z"/>
+            </svg>
+        </div>
+    </div>
+    <div class="row mb-2">
+        <div class="col-12">
+            <div class="loader" *ngIf="loading$ | async"></div>
+            <div class="overflow-scroll d-flex scroll_card card_group">
+                <ng-container *ngIf="projets$ | async as projets">
+                    <app-projet-item *ngFor="let data of projets" [projet]="data"
+                        (statusUpdateModal)="listenStatusUpdateModal($event)"
+                        (statusDeleteModal)="listenStatusDeleteModal($event)"
+                        class="col-md-3 col-9 m-2 mx-md-3"></app-projet-item>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="p-1" id="add_button" (click)="listenStatusCreateModal()">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
+        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+    </svg>
+</div>
+
+<!-- ============================== MODAL AJOUTER PROJET ========================= -->
+<div class="modal fade" id="modalCreateProjet" data-bs-backdrop="static" 
+    tabindex="-1" aria-labelledby="modalCreateProjetLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <form class="modal-content" [formGroup]="createForm" (ngSubmit)="onSubmitCreate()">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5 fw-bold" id="modalCreateProjetLabel">Ajouter un projet</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" 
+                    (click)="onCloseCreate()"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row my-3 mx-1 px-1 py-3">
+                    <!-- =============== NOM =============== -->
+                    <div class="col-12">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control ps-4" id="nom_create_projet" 
+                                placeholder="Nom ***" formControlName="nom">
+                            <label for="nom_create_projet" class="ps-4 d-flex align-items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="currentColor" viewBox="0 0 16 16">
+                                    <path d="M8.211 2.047a.5.5 0 0 0-.422 0l-7.5 3.5a.5.5 0 0 0 .025.917l7.5 3a.5.5 0 0 0 .372 0L14 7.14V13a1 1 0 0 0-1 1v2h3v-2a1 1 0 0 0-1-1V6.739l.686-.275a.5.5 0 0 0 .025-.917l-7.5-3.5ZM8 8.46 1.758 5.965 8 3.052l6.242 2.913L8 8.46Z" />
+                                    <path d="M4.176 9.032a.5.5 0 0 0-.656.327l-.5 1.7a.5.5 0 0 0 .294.605l4.5 1.8a.5.5 0 0 0 .372 0l4.5-1.8a.5.5 0 0 0 .294-.605l-.5-1.7a.5.5 0 0 0-.656-.327L8 10.466 4.176 9.032Zm-.068 1.873.22-.748 3.496 1.311a.5.5 0 0 0 .352 0l3.496-1.311.22.748L8 12.46l-3.892-1.556Z"/>
+                                </svg>
+                                <span class="mx-2">Nom du projet:</span>
+                            </label>
+                        </div>
+                    </div>
+                    <!-- ================= LIEN ================== -->
+                    <div class="col-12">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control ps-4" id="lien_create_projet" 
+                                placeholder="Lien ***" formControlName="lien">
+                            <label for="lien_create_projet" class="ps-4 d-flex align-items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="currentColor" viewBox="0 0 16 16">
+                                    <path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.002 1.002 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z"/>
+                                    <path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243L6.586 4.672z"/>
+                                </svg>
+                                <span class="mx-2">Lien URL:</span>
+                            </label>
+                        </div>
+                    </div>
+                    <!-- ================= IMG ================ -->
+                    <div class="col-12">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control ps-4" id="img_create_projet" 
+                                placeholder="Image ***" formControlName="img">
+                            <label for="img_create_projet" class="ps-4 d-flex align-items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="currentColor" viewBox="0 0 16 16">
+                                    <path d="M4.502 9a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/>
+                                    <path d="M14.002 13a2 2 0 0 1-2 2h-10a2 2 0 0 1-2-2V5A2 2 0 0 1 2 3a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v8a2 2 0 0 1-1.998 2zM14 2H4a1 1 0 0 0-1 1h9.002a2 2 0 0 1 2 2v7A1 1 0 0 0 15 11V3a1 1 0 0 0-1-1zM2.002 4a1 1 0 0 0-1 1v8l2.646-2.354a.5.5 0 0 1 .63-.062l2.66 1.773 3.71-3.71a.5.5 0 0 1 .577-.094l1.777 1.947V5a1 1 0 0 0-1-1h-10z"/>
+                                </svg>
+                                <span class="mx-2">Lien image:</span>
+                            </label>
+                        </div>
+                    </div>
+                    <!-- ================= DESCRIPTION ================ -->
+                    <div class="col-12">
+                        <div class="form-floating">
+                            <textarea class="form-control ps-4" id="description_create_projet" 
+                                placeholder="Description ***" formControlName="description"></textarea>
+                            <label for="description_create_projet" class="ps-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="currentColor" viewBox="0 0 16 16">
+                                    <path d="M2.5 3a.5.5 0 0 0 0 1h11a.5.5 0 0 0 0-1h-11zm0 3a.5.5 0 0 0 0 1h6a.5.5 0 0 0 0-1h-6zm0 3a.5.5 0 0 0 0 1h6a.5.5 0 0 0 0-1h-6zm0 3a.5.5 0 0 0 0 1h11a.5.5 0 0 0 0-1h-11zm10.113-5.373a6.59 6.59 0 0 0-.445-.275l.21-.352c.122.074.272.17.452.287.18.117.35.26.51.428.156.164.289.351.398.562.11.207.164.438.164.692 0 .36-.072.65-.216.873-.145.219-.385.328-.721.328-.215 0-.383-.07-.504-.211a.697.697 0 0 1-.188-.463c0-.23.07-.404.211-.521.137-.121.326-.182.569-.182h.281a1.686 1.686 0 0 0-.123-.498 1.379 1.379 0 0 0-.252-.37 1.94 1.94 0 0 0-.346-.298zm-2.168 0A6.59 6.59 0 0 0 10 6.352L10.21 6c.122.074.272.17.452.287.18.117.35.26.51.428.156.164.289.351.398.562.11.207.164.438.164.692 0 .36-.072.65-.216.873-.145.219-.385.328-.721.328-.215 0-.383-.07-.504-.211a.697.697 0 0 1-.188-.463c0-.23.07-.404.211-.521.137-.121.327-.182.569-.182h.281a1.749 1.749 0 0 0-.117-.492 1.402 1.402 0 0 0-.258-.375 1.94 1.94 0 0 0-.346-.3z"/>
+                                </svg>
+                                <span class="mx-2">Description:</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary close" 
+                    data-bs-dismiss="modal" (click)="onCloseCreate()">Annuler</button>
+                <button type="submit" class="btn rounded-pill valider fw-bold" [disabled]="createForm.invalid">Enregistrer</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- ============================== MODAL MODIFIER PROJET ========================= -->
+<div class="modal fade" id="modalModifierProjet" data-bs-backdrop="static" 
+    tabindex="-1" aria-labelledby="modalModifierProjetLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <form class="modal-content" [formGroup]="updateForm" (ngSubmit)="onSubmitUpdate()">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5 fw-bold" id="modalModifierProjetLabel">Modifier un projet</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" 
+                    (click)="onCloseUpdate()"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row my-3 mx-1 px-1 py-3">
+                    <!-- =============== NOM =============== -->
+                    <div class="col-12">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control ps-4" id="nom_update_projet" 
+                                placeholder="Nom ***" formControlName="nom">
+                            <label for="nom_update_projet" class="ps-4 d-flex align-items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="currentColor" viewBox="0 0 16 16">
+                                    <path d="M8.211 2.047a.5.5 0 0 0-.422 0l-7.5 3.5a.5.5 0 0 0 .025.917l7.5 3a.5.5 0 0 0 .372 0L14 7.14V13a1 1 0 0 0-1 1v2h3v-2a1 1 0 0 0-1-1V6.739l.686-.275a.5.5 0 0 0 .025-.917l-7.5-3.5ZM8 8.46 1.758 5.965 8 3.052l6.242 2.913L8 8.46Z" />
+                                    <path d="M4.176 9.032a.5.5 0 0 0-.656.327l-.5 1.7a.5.5 0 0 0 .294.605l4.5 1.8a.5.5 0 0 0 .372 0l4.5-1.8a.5.5 0 0 0 .294-.605l-.5-1.7a.5.5 0 0 0-.656-.327L8 10.466 4.176 9.032Zm-.068 1.873.22-.748 3.496 1.311a.5.5 0 0 0 .352 0l3.496-1.311.22.748L8 12.46l-3.892-1.556Z"/>
+                                </svg>
+                                <span class="mx-2">Nom du projet:</span>
+                            </label>
+                        </div>
+                    </div>
+                    <!-- ================= LIEN ================== -->
+                    <div class="col-12">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control ps-4" id="lien_update_projet" 
+                                placeholder="Lien ***" formControlName="lien">
+                            <label for="lien_update_projet" class="ps-4 d-flex align-items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="currentColor" viewBox="0 0 16 16">
+                                    <path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.002 1.002 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z"/>
+                                    <path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243L6.586 4.672z"/>
+                                </svg>
+                                <span class="mx-2">Lien URL:</span>
+                            </label>
+                        </div>
+                    </div>
+                    <!-- ================= IMG ================ -->
+                    <div class="col-12">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control ps-4" id="img_update_projet" 
+                                placeholder="Image ***" formControlName="img">
+                            <label for="img_update_projet" class="ps-4 d-flex align-items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="currentColor" viewBox="0 0 16 16">
+                                    <path d="M4.502 9a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/>
+                                    <path d="M14.002 13a2 2 0 0 1-2 2h-10a2 2 0 0 1-2-2V5A2 2 0 0 1 2 3a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v8a2 2 0 0 1-1.998 2zM14 2H4a1 1 0 0 0-1 1h9.002a2 2 0 0 1 2 2v7A1 1 0 0 0 15 11V3a1 1 0 0 0-1-1zM2.002 4a1 1 0 0 0-1 1v8l2.646-2.354a.5.5 0 0 1 .63-.062l2.66 1.773 3.71-3.71a.5.5 0 0 1 .577-.094l1.777 1.947V5a1 1 0 0 0-1-1h-10z"/>
+                                </svg>
+                                <span class="mx-2">Lien image:</span>
+                            </label>
+                        </div>
+                    </div>
+                    <!-- ================= DESCRIPTION ================ -->
+                    <div class="col-12">
+                        <div class="form-floating">
+                            <textarea class="form-control ps-4" id="description_update_projet" 
+                                placeholder="Description ***" formControlName="description"></textarea>
+                            <label for="description_update_projet" class="ps-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="currentColor" viewBox="0 0 16 16">
+                                    <path d="M2.5 3a.5.5 0 0 0 0 1h11a.5.5 0 0 0 0-1h-11zm0 3a.5.5 0 0 0 0 1h6a.5.5 0 0 0 0-1h-6zm0 3a.5.5 0 0 0 0 1h6a.5.5 0 0 0 0-1h-6zm0 3a.5.5 0 0 0 0 1h11a.5.5 0 0 0 0-1h-11zm10.113-5.373a6.59 6.59 0 0 0-.445-.275l.21-.352c.122.074.272.17.452.287.18.117.35.26.51.428.156.164.289.351.398.562.11.207.164.438.164.692 0 .36-.072.65-.216.873-.145.219-.385.328-.721.328-.215 0-.383-.07-.504-.211a.697.697 0 0 1-.188-.463c0-.23.07-.404.211-.521.137-.121.326-.182.569-.182h.281a1.686 1.686 0 0 0-.123-.498 1.379 1.379 0 0 0-.252-.37 1.94 1.94 0 0 0-.346-.298zm-2.168 0A6.59 6.59 0 0 0 10 6.352L10.21 6c.122.074.272.17.452.287.18.117.35.26.51.428.156.164.289.351.398.562.11.207.164.438.164.692 0 .36-.072.65-.216.873-.145.219-.385.328-.721.328-.215 0-.383-.07-.504-.211a.697.697 0 0 1-.188-.463c0-.23.07-.404.211-.521.137-.121.327-.182.569-.182h.281a1.749 1.749 0 0 0-.117-.492 1.402 1.402 0 0 0-.258-.375 1.94 1.94 0 0 0-.346-.3z"/>
+                                </svg>
+                                <span class="mx-2">Description:</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary close" 
+                    data-bs-dismiss="modal" (click)="onCloseUpdate()">Annuler</button>
+                <button type="submit" class="btn rounded-pill valider fw-bold" [disabled]="updateForm.invalid">Valider</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- ============================== MODAL SUPPRIMER PROJET ========================= -->
+<div class="modal fade" id="modalSupprimerProjet" data-bs-backdrop="static" 
+    tabindex="-1" aria-labelledby="modalSupprimerProjetLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-sm">
+        <form class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-6 fw-bold" id="modalSupprimerProjetLabel">Suppression</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" 
+                    (click)="onCloseDelete()"></button>
+            </div>
+            <div class="modal-body d-flex align-items-center justify-content-center text-danger">
+                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                    <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                </svg>
+                <div class="ms-2">
+                    Voulez-vous supprimer <span class="fw-bold">{{currentProjet?.nom}} ?</span>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn text-muted close" 
+                    data-bs-dismiss="modal" (click)="onCloseDelete()">Non</button>
+                <button type="button" class="btn text-danger valider fw-bold" 
+                    (click)="onConfirmDelete()">Oui</button>
+            </div>
+        </form>
+    </div>
+</div>

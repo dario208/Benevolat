@@ -1,0 +1,132 @@
+<div class="container-fluid" id="accueil">
+    <div class="loader my-1" *ngIf="loading$ | async"></div>
+    <div class="row row-cols-1 row-cols-md-4 g-4 mx-md-3 ligne_1">
+        <div class="col" *ngIf="total$ | async as total">
+            <div class="card h-100">
+                <div class="card-body position-relative">
+                    <div class="container_points">
+                        <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 16 16">
+                                <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/>
+                            </svg>
+                        </span>
+                    </div>
+                    <div class="container_element">
+                        <div class="container_icone" style="background-color: #ddc9fa;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" fill="#742bde" viewBox="0 0 16 16">
+                                <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7Zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216ZM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z"/>
+                            </svg>
+                        </div>
+                        <div class="container_texte">
+                            <span class="fs-3 fw-bold nombre">{{total.nombre}}</span>
+                            <span class="texte">Total des étudiants</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col" *ngIf="inserer$ | async as inserer">
+            <div class="card h-100">
+                <div class="card-body">
+                    <div class="container_points">
+                        <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 16 16">
+                                <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/>
+                            </svg>
+                        </span>
+                    </div>
+                    <div class="container_element">
+                        <div class="container_icone" style="background-color: #cafdeff3;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" fill="#00d89e" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M15.854 5.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L12.5 7.793l2.646-2.647a.5.5 0 0 1 .708 0z"/>
+                                <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                            </svg>
+                        </div>
+                        <div class="container_texte">
+                            <span class="fs-3 fw-bold nombre">{{inserer.pourcentage}}</span>
+                            <span class="texte">Insérés profession...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col" *ngIf="recherche$ | async as recherche">
+            <div class="card h-100">
+                <div class="card-body">
+                    <div class="container_points">
+                        <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 16 16">
+                                <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/>
+                            </svg>
+                        </span>
+                    </div>
+                    <div class="container_element">
+                        <div class="container_icone" style="background-color: #fcc0bcf1;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" fill="#f32c1d" viewBox="0 0 16 16">
+                                <path d="M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm-9 8c0 1 1 1 1 1h5.256A4.493 4.493 0 0 1 8 12.5a4.49 4.49 0 0 1 1.544-3.393C9.077 9.038 8.564 9 8 9c-5 0-6 3-6 4Z"/>
+                                <path d="M16 12.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Zm-3.5-2a.5.5 0 0 0-.5.5v1.5a.5.5 0 0 0 1 0V11a.5.5 0 0 0-.5-.5Zm0 4a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1Z"/>
+                            </svg>
+                        </div>
+                        <div class="container_texte">
+                            <span class="fs-3 fw-bold nombre">{{recherche.pourcentage}}</span>
+                            <span class="texte">En recherche...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col" *ngIf="etudes$ | async as etudes">
+            <div class="card h-100">
+                <div class="card-body">
+                    <div class="container_points">
+                        <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 16 16">
+                                <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/>
+                            </svg>
+                        </span>
+                    </div>
+                    <div class="container_element">
+                        <div class="container_icone" style="background-color: #dff5fff3;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" fill="#0093b7" viewBox="0 0 16 16">
+                                <path d="M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm-9 8c0 1 1 1 1 1h5.256A4.493 4.493 0 0 1 8 12.5a4.49 4.49 0 0 1 1.544-3.393C9.077 9.038 8.564 9 8 9c-5 0-6 3-6 4Zm9.886-3.54c.18-.613 1.048-.613 1.229 0l.043.148a.64.64 0 0 0 .921.382l.136-.074c.561-.306 1.175.308.87.869l-.075.136a.64.64 0 0 0 .382.92l.149.045c.612.18.612 1.048 0 1.229l-.15.043a.64.64 0 0 0-.38.921l.074.136c.305.561-.309 1.175-.87.87l-.136-.075a.64.64 0 0 0-.92.382l-.045.149c-.18.612-1.048.612-1.229 0l-.043-.15a.64.64 0 0 0-.921-.38l-.136.074c-.561.305-1.175-.309-.87-.87l.075-.136a.64.64 0 0 0-.382-.92l-.148-.045c-.613-.18-.613-1.048 0-1.229l.148-.043a.64.64 0 0 0 .382-.921l-.074-.136c-.306-.561.308-1.175.869-.87l.136.075a.64.64 0 0 0 .92-.382l.045-.148ZM14 12.5a1.5 1.5 0 1 0-3 0 1.5 1.5 0 0 0 3 0Z"/>
+                            </svg>
+                        </div>
+                        <div class="container_texte">
+                            <span class="fs-3 fw-bold nombre">{{etudes.pourcentage}}</span>
+                            <span class="texte">En cours d'étude</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mx-md-3 my-3 justify-content-between align-items-center ligne_2">
+        <div class="col-md-8 col-12 my-2">
+            <div class="container_canvas stat1 overflow-scroll rounded-3 text-center" style="background-color: #fff;">
+                <span class="m-2 fw-bold">Statistique des jeunes insérés professionnellement par promotion</span>
+                <hr>
+                <canvas id="statistique_1"></canvas>
+            </div>
+        </div>
+        <div class="col-md-4 col-12 my-2">
+            <div class="container_texte">
+                <span></span>
+            </div>
+            <div class="container_canvas rounded-3 px-2 py-1 stat2" style="background-color: #fff;">
+                <div class="entete m-2">
+                    <span class="fw-bold">Status professionnellement</span>
+                    <div *ngIf="promotions$ | async as promotions">
+                        <select class="form-select form-select-sm" aria-label=".form-select-sm" 
+                            [formControl]="promotionCtrl">
+                            <option selected value="0">Promotion</option>
+                            <option *ngFor="let promotion of promotions" [value]="promotion.id">{{promotion.nom}}</option>
+                        </select>
+                    </div>
+                </div>
+                <hr>
+                <canvas id="statistique_2"></canvas>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,207 @@
+#emplois {
+    .container_cartes {
+        overflow-y: scroll;
+        height: 75vh;
+        &::-webkit-scrollbar {
+            width: 3px;
+        }
+
+        &::-webkit-scrollbar-track {
+            background-color: transparent;
+            border-radius: 3px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background-color: #0093b7;
+            border-radius: 3px;
+        }
+
+        .empty_emplois {
+            .col-12 {
+                background-color: #fff;
+                img {
+                    filter: drop-shadow(-1px 2px 6px #094b5c27);
+                }
+            }
+        }
+    }
+
+    .container_texte {
+        .container_input {
+            background-color: #fff;
+            box-shadow: 1px 2px 3px #ebeaeab8;
+            & > * {
+                padding: 0%;
+            }
+
+            input {
+                border: none;
+                box-shadow:  inset 0 0 6px #0d7b9933;
+                font-size: .83rem;
+                color: #144552ef;
+            }
+
+            label {
+                color: #14455282;
+                font-weight: bold;
+            }
+
+            .search_icone {
+                position: absolute;
+                top: 0;
+                right: 0.5rem;
+                transform: translate(-50%, 87%);
+                
+                svg {
+                    fill: #14455282;
+                }
+            }
+        }
+    }
+}
+
+#add_button {
+    background-color: #0093b7;
+
+    svg {
+        fill: #fff;
+    }
+}
+
+#modalModifierEmplois, #modalCreateEmplois {
+    color: #0093b7;
+    form {
+        input, textarea {
+            font-size: .8rem;
+            opacity: .8;
+            color: #121a22ea;
+            letter-spacing: 1px;
+        }
+
+        textarea {
+            height: 131px;
+        }
+
+        button {
+            font-size: .9rem;
+            letter-spacing: 1px;
+        }
+
+        button.close {
+            background: transparent;
+            border: none;
+            color: #727272e7;
+            transform: scale(1);
+            transition: all .3s ease-in-out;
+            &:hover {
+                font-weight: bold;
+                transform: scale(1.03);
+            }
+        }
+
+        button.valider {
+            background-color: #0093b7;
+            color: #fff;
+        }
+
+        .container_checkbox {
+            ul {
+                overflow-y: scroll;
+                height: 13vh;
+
+                &::-webkit-scrollbar {
+                    width: 3px;
+                }
+        
+                &::-webkit-scrollbar-track {
+                    border-radius: 3px;
+                }
+        
+                &::-webkit-scrollbar-thumb {
+                    background-color: #0093b7;
+                    border-radius: 3px;
+                }
+            }
+        }
+    }
+}
+
+#modalSupprimerEmplois {
+    color: #0093b7;
+    button.close, button.valider {
+        font-size: .9rem;
+        letter-spacing: 1px;
+        background: transparent;
+        border: none;
+        transform: scale(1);
+        transition: transform .3s ease-in-out;
+        position: relative;
+
+        &::after {
+            content: '';
+            position: absolute;
+            height: 1.3px;
+            width: 0;
+            bottom: 23%;
+            left: 0;
+            background-color: currentColor;
+            transition: all .3s ease-in-out;
+        }
+
+        &:hover {
+            transform: scale(1.1);
+        }
+
+        &:hover::after {
+            width: 100%;
+        }
+    }
+}
+
+#modalDisplayEmplois {
+    #modalDisplayEmploisLabel {
+        color: #0093b7;
+    }
+
+    .entete {
+        display: flex;
+        flex-direction: column;
+        color: #144552c2;
+        .nom {
+            font-size: .8rem;
+            display: flex;
+        }
+        .date {
+            font-size: .6rem;
+        }
+    }
+
+    .description_emploi {
+        width: 100%;
+        background-color: #f5f5f5b8;
+
+        span {
+            color: #063b48ea;
+        }
+    }
+
+    .categorie_emploi {
+        color: #063b48ea;
+        .titre {
+            color: #0093b7;
+            position: relative;
+
+            &::after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 9.5%;
+                transform: translateY(100%);
+                width: 81%;
+                height: 1.3px;
+                border-radius: 1px;
+                background-color: #0093b7;
+            }
+        }
+    }
+}

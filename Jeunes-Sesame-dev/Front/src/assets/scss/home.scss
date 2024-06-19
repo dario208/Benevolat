@@ -1,0 +1,342 @@
+/*
+  *****************************************************************
+			CUSTOM SCROLLBAR STYLES
+  *****************************************************************
+*/
+
+/* width */
+::-webkit-scrollbar {
+	width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+	border-radius: 20px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+	background: #80808038;
+	border-radius: 20px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+	background: #80808075;
+}
+
+
+/*
+  *****************************************************************
+			AVATAR IMAGE
+  *****************************************************************
+*/
+
+.shadow-sm {
+	box-shadow: 0 .125rem .25rem rgba(0, 0, 0, .075) !important;
+}
+
+.rounded-circle {
+	border-radius: 50% !important;
+}
+
+.img-thumbnail {
+	padding: 0.25rem;
+	background-color: #fff;
+	border-radius: 0.25rem;
+	max-width: 100%;
+	height: auto;
+}
+
+.inserted {
+	border: 2px solid #16a0849a;
+}
+
+.searching {
+	border: 2px solid #c0392b9a;
+}
+
+.student {
+	border: 2px solid #2980b99a;
+}
+
+.normal-img {
+	border: 0.5px solid #99999950;
+}
+
+
+/*
+  *****************************************************************
+			CUSTOM INPUT SELECT 
+  *****************************************************************
+*/
+
+fieldset {
+	border-radius: 20px !important;
+	border: 1px solid #ffffff00 !important;
+	background-color: #ffffff1c;
+}
+
+.MuiOutlinedInput-root {
+	color: white !important;
+}
+
+.MuiSelect-icon {
+	color: white !important;
+}
+
+
+/*
+  *****************************************************************
+			MAP STYLES 
+  *****************************************************************
+*/
+
+@keyframes map {
+	0% {
+		fill: #e9f1f1;
+	}
+
+	100% {
+		fill: #16a084c0
+	}
+}
+
+.svg-path {
+	fill: #16a084c0;
+	stroke: #e9f1f1;
+	stroke-width: 1px;
+	transition: fill 0.3s;
+	cursor: pointer;
+	animation: map 1s 1;
+}
+
+.active-region {
+	cursor: pointer;
+	fill: #16a085;
+}
+
+
+/*
+  *****************************************************************
+			STUDENTS LIST  
+  *****************************************************************
+*/
+
+.list-header {
+	background-image: linear-gradient(to bottom, #16a085, #16a085);
+}
+
+.container-student {
+	padding: 10px 15px 10px 15px;
+	align-items: center;
+	justify-content: space-between !important;
+	color: white;
+	display: grid;
+	grid-auto-flow: column;
+	grid-column-gap: 0px
+}
+
+.container-filter {
+	padding: 0px 15px 10px 15px;
+	align-items: center;
+	justify-content: space-between !important;
+	color: white;
+	display: grid;
+	grid-auto-flow: column;
+	grid-column-gap: 0px
+}
+
+.container-list {
+	padding: 1% 15px 0px 23px;
+	align-items: center;
+	height: calc(100vh - 111px);
+	background-color: #edf2f5;
+}
+
+.list-etudiant {
+	padding: 0px 5px 0px 0px;
+	overflow-y: scroll !important;
+	height: 100%;
+}
+
+
+/*
+  *****************************************************************
+			CUSTOM PAPER  
+  *****************************************************************
+*/
+
+.MuiPaper-root {
+	box-shadow: none !important;
+}
+
+
+/*
+  *****************************************************************
+			SOCIAL ICONS  
+  *****************************************************************
+*/
+
+.social-icon {
+	transition: 1s;
+	cursor: pointer;
+	color: #4b5b64;
+}
+
+.social-icon:hover {
+	transition: 1s;
+	transform: scale(1.2);
+}
+
+
+/*
+  *****************************************************************
+			CUSTOM CHECKBOXES 
+  *****************************************************************
+*/
+
+/* Hide the browser's default checkbox */
+.input {
+	position: absolute;
+	opacity: 0;
+	cursor: pointer;
+	height: 0;
+	width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+	position: absolute;
+	border-radius: 5px;
+	top: 0;
+	left: 0;
+	height: 20px;
+	width: 20px;
+	background-color: #eee;
+}
+
+
+/* When the checkbox is checked, add a blue background */
+.input:checked~.checkmark {
+	background-color: #16a085;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+	content: "";
+	position: absolute;
+	display: none;
+}
+
+/* Show the checkmark when checked */
+.input:checked~.checkmark:after {
+	display: block;
+}
+
+/* Style the checkmark/indicator */
+.checkmark:after {
+	left: 7px;
+	top: 3px;
+	width: 3px;
+	height: 8px;
+	border: solid white;
+	border-width: 0 3px 3px 0;
+	-webkit-transform: rotate(45deg);
+	-ms-transform: rotate(45deg);
+	transform: rotate(45deg);
+}
+
+
+/*
+  *****************************************************************
+			CUSTOM TOASTIFY 
+  *****************************************************************
+*/
+
+.Toastify__toast--info {
+	font-family: "product";
+}
+
+.Toastify__toast--warning {
+	font-family: "product";
+	background: #f57c00 !important;
+}
+
+.Toastify__toast--error {
+	font-family: "product";
+}
+
+
+/*
+  *****************************************************************
+			MEDIA QUERIES 
+  *****************************************************************
+*/
+
+@media screen and (max-width: 1520px) {
+	.container-filter {
+		display: block;
+	}
+}
+
+@media screen and (max-width: 1520px) and (min-width: 1092px) {
+	.container-list {
+		height: calc(100vh - 168px);
+	}
+}
+
+@media screen and (max-width: 1091px) and (min-width: 900px) {
+	.container-list {
+		height: calc(100vh - 215px);
+	}
+}
+
+// Gestion de la liste des étudiants sur un écran moins de 900px
+@media screen and (max-width: 899px) {
+	.container-list {
+		padding: 00px 0px 0px 0px;
+		height: calc(100vh - 115px);
+	}
+
+	.list-etudiant {
+		grid-template-columns: repeat(3, 1fr);
+		grid-auto-rows: 265px;
+		padding: 10px 5px 10px 20px;
+		overflow-y: scroll;
+		align-items: flex-start;
+		height: 100%;
+	}
+}
+
+// Gestion de la liste des étudiants sur un écran moins de 595px
+@media screen and (max-width: 594px) {
+	.container-list {
+		padding: 00px 0px 0px 0px;
+		height: calc(100vh - 161px);
+	}
+
+	.list-etudiant {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+// Gestion de la liste des étudiants sur un écran moins de 405px
+@media screen and (max-width: 404px) {
+	.container-list {
+		padding: 00px 0px 0px 0px;
+		height: calc(100vh - 165px);
+	}
+
+	.list-etudiant {
+		grid-template-columns: repeat(1, 1fr);
+	}
+}
+
+// Gestion de la liste des étudiants sur un écran moins de 362px
+@media screen and (max-width: 361px) {
+	.container-list {
+		padding: 00px 0px 0px 0px;
+		height: calc(100vh - 220px);
+	}
+}

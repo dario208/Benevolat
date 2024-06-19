@@ -1,0 +1,24 @@
+@font-face {
+	font-family: 'product';
+	src: local('product'), url(../fonts/ProductSans/ProductSansRegular.ttf) format('TrueType');
+}
+
+body {
+	margin: 0 !important;
+	font-family: "product";
+	font-weight: lighter;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+	font-family: "product";
+	font-weight: normal;
+	color: #2b313b;
+	margin: 0px;
+}
+
+code {
+	font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+		monospace;
+}

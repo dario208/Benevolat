@@ -1,0 +1,91 @@
+version: '3'
+
+services:
+  mariadb:
+    image: mariadb
+    container_name: mariadb_sesame
+    env_file:
+      - mariadb/docker.env
+    environment:
+      MARIADB_ROOT_PASSWORD: ${ROOT_PASSWORD}
+      MARIADB_USER: ${MARIADB_USER}
+      MARIADB_PASSWORD: ${MARIADB_PASSWORD}
+      MARIADB_DATABASE: ${MARIADB_DATABASE}
+    volumes:
+      - ./mariadb/data:/var/lib/mysql
+      - ./mariadb/init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "3306:3306"
+    restart: always
+    networks:
+      - iteams_network
+
+  apisesame:
+    depends_on:
+      - mariadb
+    build: ../Back/api-sesame/
+    platform: linux/amd64
+    container_name: apisesame
+    env_file:
+      - apisesame/docker.env
+    ports:
+      - "${SERVER_PORT:-3117}:${SERVER_PORT:-3117}"
+    volumes:
+      - ./apisesame/uploads:/app/uploads
+    restart: on-failure
+    networks:
+      - iteams_network
+
+  admin-backoffice:
+    build:
+      context: ../Back-Office/admin/
+      args:
+        - ENV_PROD_FILE=${ADMIN_ENV_PROD_FILE}
+    platform: linux/amd64
+    container_name: admin-backoffice
+    env_file:
+      - admin/docker.env
+    volumes:
+      - ./admin/admin.conf:/etc/nginx/conf.d/default.conf
+    ports:
+      - "${ADMIN_PORT:-3119}:80"
+    restart: on-failure
+    networks:
+      - iteams_network
+
+  student-backoffice:
+    build:
+      context: ../Back-Office/etudiants/
+      args:
+        - ENV_PROD_FILE=${STUDENT_ENV_PROD_FILE}
+    platform: linux/amd64
+    container_name: student-backoffice
+    env_file:
+      - student/docker.env
+    volumes:
+      - ./student/student.conf:/etc/nginx/conf.d/default.conf
+    ports:
+      - "${STUDENT_PORT:-3123}:80"
+    restart: on-failure
+    networks:
+      - iteams_network
+
+  front-office:
+    build:
+      context: ../Front/
+      args:
+        - ENV_PROD_FILE=${FRONT_ENV_PROD_FILE}
+    platform: linux/amd64
+    container_name: front-office
+    env_file:
+      - front/docker.env
+    volumes:
+      - ./front/front.conf:/etc/nginx/conf.d/default.conf
+    ports:
+      - "${FRONT_PORT:-3129}:80"
+    restart: on-failure
+    networks:
+      - iteams_network
+
+networks:
+  iteams_network:

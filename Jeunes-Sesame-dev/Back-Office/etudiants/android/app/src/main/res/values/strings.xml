@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Jeunes-S</string>
+    <string name="title_activity_main">Jeunes-S</string>
+    <string name="package_name">com.iteams.jeuness</string>
+    <string name="custom_url_scheme">com.iteams.jeuness</string>
+</resources>
