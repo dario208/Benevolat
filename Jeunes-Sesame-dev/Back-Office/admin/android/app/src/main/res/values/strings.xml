@@ -1,7 +1,0 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
-    <string name="app_name">Admin Jeunes-S</string>
-    <string name="title_activity_main">Admin Jeunes-S</string>
-    <string name="package_name">com.adminjeuness.app</string>
-    <string name="custom_url_scheme">com.adminjeuness.app</string>
-</resources>
